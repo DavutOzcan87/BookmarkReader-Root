@@ -1,24 +1,31 @@
 const MongoClient = require('mongodb').MongoClient;
 
 module.exports={
-    connection:null,
+    client:null,
+    db:null,
     get:function(){
-        return this.connection;
+        return this.db;
     },
     close:function(){
-        if(this.connection != null)
-            this.connection.close();
-        this.connection = null;
+        if(this.client != null)
+        {
+            this.client.close();
+            this.db = null;
+        }
     },
-    connect: function(dbname , callback){
+    connect: function(url,dbname , callback){
         const self = this;
-        var cacheConnection = function(err, db) {
-            self.connection= db;
+        var cacheConnection = function(err, client) {
+            if(!err)
+            {
+                self.db=  client.db(dbname);
+                self.client = client;
+            }
             callback(err);
           };
         
           try {
-            MongoClient.connect(dbname, cacheConnection);
+            MongoClient.connect(url, cacheConnection);
           } catch(ex) {
             callback(ex);
           }
