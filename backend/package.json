@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha tests"
   },
   "author": "davutozcan87@gmail.co",
   "license": "ISC",
@@ -13,5 +13,8 @@
     "jasmin": "0.0.2",
     "mocha": "^5.2.0",
     "sinon": "^6.2.0"
+  },
+  "dependencies": {
+    "mongodb": "^3.1.4"
   }
 }
