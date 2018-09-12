@@ -23,13 +23,10 @@ describe('user db tests' , function(){
         db.get().collection('users').drop().then(()=>done());
     });
 
-    it('all should return records from db' , (done)=>{
-        
-     users.all().then(o=>{
-            console.log("all records from db --->" , o);
-            expect(o.length).to.be.eql(3);
-            done();
-        }).catch(o=>console.log("All method failed", o));
+    it('all should return records from db' , ()=>{
+       return users.all().then(o=>{
+           expect(o.length).to.be.eql(3);
+       });
     });
 });
 
