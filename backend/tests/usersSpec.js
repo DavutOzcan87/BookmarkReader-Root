@@ -5,11 +5,11 @@ const ObjectId = require('mongodb').ObjectID;
 describe('user db tests' , function(){
     let aUser = { name:'user1'};
     let userArray = [
-        { name:'user2' , surname:'surname 2' , email:'user2@gmail.com' , google_id:'g2' ,sites:[
+        {_id:new ObjectId('123412341230'), name:'user2' , surname:'surname 2' , email:'user2@gmail.com' , google_id:'g2' ,sites:[
             "www.google.com","www.facebook.com"
         ]},
-        { name:'user3' , surname:'surname 3' , email:'user3@gmail.com' , google_id:'g2' },
-        { name:'user4' , surname:'surname 4' , email:'user4@gmail.com' , google_id:'g2' }
+        {_id:new ObjectId('123412341231'), name:'user3' , surname:'surname 3' , email:'user3@gmail.com' , google_id:'g2' },
+        {_id:new ObjectId('123412341232'), name:'user4' , surname:'surname 4' , email:'user4@gmail.com' , google_id:'g2' }
     ];
     before(function(done){
         db.connect('mongodb://localhost:27017' ,  'users' , done);
