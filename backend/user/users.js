@@ -14,5 +14,8 @@ module.exports={
                     resolve(result);
             });
         });
+    },
+    add:function(user){
+        return db.get().collection(COLLECTION).insertOne(user);
     }
 }
