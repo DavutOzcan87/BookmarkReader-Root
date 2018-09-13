@@ -17,5 +17,8 @@ module.exports={
     },
     add:function(user){
         return db.get().collection(COLLECTION).insertOne(user);
+    },
+    findByGoogleId:function(googleId){
+        return db.get().collection(COLLECTION).findOne({'googleId':googleId});
     }
 }
