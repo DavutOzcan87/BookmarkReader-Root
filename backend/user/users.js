@@ -20,5 +20,8 @@ module.exports={
     },
     findByGoogleId:function(googleId){
         return db.get().collection(COLLECTION).findOne({'googleId':googleId});
+    },
+    update:function(filter , user){
+        return db.get().collection(COLLECTION).updateOne(filter , {$set:user});
     }
 }

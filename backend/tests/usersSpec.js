@@ -49,5 +49,16 @@ describe('user db tests' , function(){
 
             });
     });
+
+    it('should update' , ()=>{
+        let updatedUser = {name:'user3 updated' , surname:'surname 3 updated' , email:'user3@gmail.com updated' , googleId:'g3' };
+        return users.update({googleId:'g3'} ,updatedUser )
+        .then(()=>users.findByGoogleId('g3'))
+        .then(o=>{
+            expect(o.name).to.be.eql('user3 updated');
+            expect(o.surname).to.be.eql('surname 3 updated');
+            expect(o.email).to.be.eql('user3@gmail.com updated');
+        });
+    });
 });
 
