@@ -23,5 +23,8 @@ module.exports={
     },
     update:function(filter , user){
         return db.get().collection(COLLECTION).updateOne(filter , {$set:user});
+    },
+    deleteByGoogleId:function(googleId){
+        return db.get().collection(COLLECTION).deleteOne({googleId:googleId});  
     }
 }

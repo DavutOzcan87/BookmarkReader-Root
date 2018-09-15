@@ -60,5 +60,14 @@ describe('user db tests' , function(){
             expect(o.email).to.be.eql('user3@gmail.com updated');
         });
     });
+
+
+    it('should delete' , ()=>{
+         users.deleteByGoogleId('g3')
+         .then(()=>users.all())
+         .then(o=>{
+            expect(o.length).to.be.eql(2);
+         });
+    });
 });
 
