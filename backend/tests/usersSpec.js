@@ -69,5 +69,12 @@ describe('user db tests' , function(){
             expect(o.length).to.be.eql(2);
          });
     });
+
+    it('should return null if cannot find' , ()=>{
+        return users.findByGoogleId('g234234')
+        .then(o=>{
+           expect(o).to.be.null;
+        });
+    })
 });
 
