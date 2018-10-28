@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "starting $(date)" >> /tmp/bookmarkreader.txt
+echo "starting $(date)" 
 cd /home/davut/projects/BookmarkReader-Root/backend/
-echo $(pwd) >> /tmp/bookmarkreader.txt
-/home/davut/.nvm/versions/node/v9.5.0/bin/node bin/www >> /tmp/bookmarkreader.txt 2>&1
+echo $(pwd) 
+/home/davut/.nvm/versions/node/v9.5.0/bin/node bin/www

@@ -1,7 +1,6 @@
 [Unit]
 Description=Bookmarkreader service
-After=network.target
-StartLimitIntervalSec=0
+After=network.target mongod.service
 [Service]
 Type=simple
 Restart=always
