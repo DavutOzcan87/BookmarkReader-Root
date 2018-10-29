@@ -1,0 +1,14 @@
+[Unit]
+Description=Bookmarkreader service
+After=network.target mongod.service
+[Service]
+Type=simple
+Restart=always
+RestartSec=3
+User=davut
+#WorkingDirectory=/home/davut/BookmarkReader-Root/backend
+WorkingDirectory=/home/davut/projects/BookmarkReader-Root/backend
+ExecStart=/home/davut/projects/BookmarkReader-Root/deploy/start.sh
+
+[Install]
+WantedBy=multi-user.target

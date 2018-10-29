@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha tests --watch",
+    "start": "node ./bin/www"
   },
   "author": "davutozcan87@gmail.co",
   "license": "ISC",
@@ -13,5 +14,16 @@
     "jasmin": "0.0.2",
     "mocha": "^5.2.0",
     "sinon": "^6.2.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "email-validator": "^2.0.4",
+    "express": "^4.16.3",
+    "http-errors": "~1.6.2",
+    "jade": "~1.11.0",
+    "mongodb": "^3.1.4",
+    "morgan": "~1.9.0"
   }
 }
