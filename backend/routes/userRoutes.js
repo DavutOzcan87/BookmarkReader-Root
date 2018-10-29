@@ -17,7 +17,12 @@ router.get('/:googleId', function (req, res, next) {
     console.log("Received google id", req.params.googleId);
     USERS.findByGoogleId(req.params.googleId).then(
         o => {
-            res.send(o);
+            if(!o)
+            {
+                res.status(404).send({msg:`no record found for ${req.params.googleId}` , error:""});
+            }else{
+                res.send(o);
+            }
         }
     ).catch(e => {
         res.status(500).send({ msg: "cannot read records from database", error: e });

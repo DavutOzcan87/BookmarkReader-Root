@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha tests --watch",
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "debug": "node --nolazy --inspect-brk=9229 ./bin/www"
   },
   "author": "davutozcan87@gmail.co",
   "license": "ISC",
