@@ -46,7 +46,29 @@ router.patch("/:googleId/bookmarks" , (req , resp , next)=>{
         })
 });
 
-module.exports = router;
+router.delete("/:googleId/bookmarks" , (req , resp , next)=>{
+    let bookmarksToDelete = req.body;
+    let googleId = req.params.googleId;
+    USERS.findByGoogleId(googleId)
+        .then(user=>{
+            if(!user)
+                throw `User "${googleId}" not found`;
+            return user;
+        }).then(user=>{
+            user.bookmarks = user.bookmarks.filter(item => !bookmarksToDelete.includes(item));
+            return user;
+        }).then(user =>{
+              return USERS.update({googleId} , user);
+        }).then(update =>{
+            return USERS.findByGoogleId(googleId);
+        }).then(user=>{
+            resp.status(200).send(user);
+        }).catch(e=>{
+            internalError(resp , e);
+        });
+});
+
+
 
 function userNotFound(res, googleId, err) {
     res.status(404).send({ msg: `user not found with google id "${googleId}"`, error: err });
@@ -56,3 +78,5 @@ function internalError(res , err)
 {
     res.status(500).send({message:"request failed" , error : err});
 }
+
+module.exports = router;
