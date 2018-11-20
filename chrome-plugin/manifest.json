@@ -1,0 +1,19 @@
+{
+  "name": "Bookmarkreader chrome plugin",
+  "version": "1.1",
+  "manifest_version": 2,
+  "description": "A browser action to export your bookmarks to Bookmarkreader app.",
+  "browser_action": {
+    "default_title": "BookmarkReader",
+    "default_icon": "icon.png"
+  },
+  "permissions": [
+    "bookmarks"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  }
+}
