@@ -8,7 +8,8 @@ function dumpBookmarks() {
 }
 
 function dumpTreeNodes(bookmarkNodes) {
-  var list = $('<ul>');
+  console.log("bookmarknodes->" , bookmarkNodes);
+  var list = $('<div>');
   var i;
   for (i = 0; i < bookmarkNodes.length; i++) {
     list.append(dumpNode(bookmarkNodes[i]));
@@ -20,14 +21,19 @@ function dumpNode(bookmarkNode) {
    console.log("node ->" , bookmarkNode);
    if(!bookmarkNode.children)
    {
-     return $('<li class="single_url">').append(bookmarkNode.url);
+      return $('<li class="single_url">').append(bookmarkNode.url);
    }else{
-     let root = $('<li>').append(bookmarkNode.title);
+    let root = undefined;
+     if(bookmarkNode.title == 0)
+        root = $('<div>');
+     else
+        root = $('<li>').append(bookmarkNode.title);
+
+     let listRoot = $("<ul>");
      bookmarkNode.children.forEach(element => {
-       let subRoot= $('<ul>');
-       subRoot.append(dumpNode(element));
-       root.append(subRoot);
+       listRoot.append(dumpNode(element));
      });
+     root.append(listRoot);
      return root;
    }
 }
