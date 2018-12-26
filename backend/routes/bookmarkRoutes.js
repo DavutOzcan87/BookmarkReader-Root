@@ -65,6 +65,28 @@ router.delete("/:googleId/bookmarks" , (req , resp , next)=>{
         });
 });
 
+router.post("/:googleId/delete-bookmarks" , (req , resp , next)=>{
+    let bookmarksToDelete = req.body;
+    let googleId = req.params.googleId;
+    findByGoogleId(googleId)
+    .then(user=>{
+            user.bookmarks = user.bookmarks.filter(item => !bookmarksToDelete.includes(item));
+            return user;
+        })
+    .then(user =>{
+              update(user);
+        })
+    .then(update =>{
+            return USERS.findByGoogleId(googleId);
+        })
+    .then(user=>{
+            resp.status(200).send(user);
+        })
+    .catch(e=>{
+            errorResponse(resp , e);
+        });
+});
+
 router.post("/:googleId/bookmarks" , (req , resp , next)=>{
     let googleId = req.params.googleId;
     let bookmarkArray = req.body;
@@ -115,7 +137,7 @@ function errorResponse(res , err)
     {
         res.status(err.status).send({message:err.message ,error:err.error });
     }else
-        res.status(500).send({message:"request failed" , error : err});
+        res.status(500).send({message:"request failed" , error : err.message});
 }
 
 function isStringArray(arr){
