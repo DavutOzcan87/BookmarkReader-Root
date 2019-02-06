@@ -46,7 +46,7 @@ server.on('listening', onListening);
 
 function normalizeDataBaseIp(envArg){
   if(!envArg){
-    return localhost;
+    return "localhost";
   }else
     return envArg;
 }

@@ -4,12 +4,13 @@ const USERS = require('../user/users');
 const UserValidator = require('../user/UserValidation').UserValidationHelper;
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  USERS.all().then(
+  
+    USERS.all().then(
       o=>{
           res.send(o);
       }
   ).catch(e=>{
-      res.statusCode(500).send({msg:"cannot read records from database" , error:e});
+      res.status(500).send({msg:"cannot read records from database" , error:e.message});
   });
 });
 
