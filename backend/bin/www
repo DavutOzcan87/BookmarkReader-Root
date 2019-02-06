@@ -14,8 +14,10 @@ const db = require('../db/db');
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
+console.log("env.MONGO_IP" , process.env.MONGO_IP);
+var dataBaseIp = normalizeDataBaseIp(process.env.MONGO_IP);
 
-db.connect("mongodb://localhost:27017" ,"usersdb-prod" , err=>{
+db.connect(`mongodb://${dataBaseIp}:27017` ,"usersdb-prod" , err=>{
     if(err)
     {
       console.error("DB Connection failed");
@@ -41,6 +43,13 @@ server.on('listening', onListening);
 /**
  * Normalize a port into a number, string, or false.
  */
+
+function normalizeDataBaseIp(envArg){
+  if(!envArg){
+    return localhost;
+  }else
+    return envArg;
+}
 
 function normalizePort(val) {
   var port = parseInt(val, 10);

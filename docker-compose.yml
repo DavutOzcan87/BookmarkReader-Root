@@ -13,9 +13,15 @@ services:
       ME_CONFIG_MONGODB_ADMINUSERNAME: ${ME_CONFIG_MONGODB_ADMINUSERNAME}
       ME_CONFIG_MONGODB_ADMINPASSWORD: ${ME_CONFIG_MONGODB_ADMINPASSWORD}
       ME_CONFIG_MONGODB_ENABLE_ADMIN: 'false'
-  
-  # mongo-express:
-  #   image: mongo-express
-  #   restart: always
-  #   ports:
-  #     - 8081:8081
+      MONGO_INITDB_DATABASE: animals
+    volumes: 
+      - "/home/davut/docs/mongo-test:/data/db"
+  backend:
+    depends_on:
+      - mongo
+    image: bookmarkreader-backend
+    environment:
+      MONGO_IP: mongo
+    restart: always
+    ports:
+      - 3000:3000
