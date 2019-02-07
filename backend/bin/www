@@ -15,20 +15,23 @@ var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
 console.log("env.MONGO_IP" , process.env.MONGO_IP);
-var dataBaseIp = normalizeDataBaseIp(process.env.MONGO_IP);
+var dataBaseIp = assertEnvNotEmpty(process.env.MONGO_IP,"MONGO_IP");
+let userName = assertEnvNotEmpty(process.env.MONGO_USER,"MONGO_USER");
+let password= assertEnvNotEmpty(process.env.MONGO_PASSWORD,"MONGO_PASSWORD");
 
-db.connect(`mongodb://${dataBaseIp}:27017` ,"usersdb-prod" , err=>{
+let encodedName =  encodeURIComponent(userName);
+let encodedPass = encodeURIComponent(password);
+
+const url = `mongodb://${encodedName}:${encodedPass}@${dataBaseIp}:27017`;
+
+db.connect(url,"usersdb-prod" , (err,client)=>{
     if(err)
     {
       console.error("DB Connection failed");
       console.error(err);
+      throw "Cannot connect database";
     }
 });
-/**
- * Create HTTP server.
- */
-
-
 
 var server = http.createServer(app);
 
@@ -44,9 +47,9 @@ server.on('listening', onListening);
  * Normalize a port into a number, string, or false.
  */
 
-function normalizeDataBaseIp(envArg){
+function assertEnvNotEmpty(envArg , envName){
   if(!envArg){
-    return "localhost";
+    throw `Environment ${envName} not set`;
   }else
     return envArg;
 }
