@@ -1,8 +1,5 @@
 const db = require('../db/db');
 
-
-const DBURL = "mongodb://localhost:27017";
-const DBNAME = "usersdb";
 const COLLECTION = "users";
 module.exports={
     all:function(){

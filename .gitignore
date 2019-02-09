@@ -72,3 +72,6 @@ typings/
 # Serverless directories
 .serverless
 package-lock.json
+
+bookmarkreader.crt
+bookmarkreader.key

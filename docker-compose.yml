@@ -22,6 +22,16 @@ services:
     image: bookmarkreader-backend
     environment:
       MONGO_IP: mongo
+      MONGO_USER: ${MONGO_INITDB_ROOT_USERNAME}
+      MONGO_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
     restart: always
     ports:
       - 3000:3000
+  ssl-proxy:
+    depends_on:
+      - backend
+    build: ./proxy
+    ports:
+      - 70:70
+      - 3080:3080
+    restart: always
