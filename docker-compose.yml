@@ -15,7 +15,7 @@ services:
       ME_CONFIG_MONGODB_ENABLE_ADMIN: 'false'
       MONGO_INITDB_DATABASE: animals
     volumes: 
-      - "/home/davut/docs/mongo-test:/data/db"
+      - "${MONGO_LOCAL_SAVE_LOCATION}:/data/db"
   backend:
     depends_on:
       - mongo
