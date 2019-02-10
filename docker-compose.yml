@@ -30,8 +30,15 @@ services:
   ssl-proxy:
     depends_on:
       - backend
+      - ui
     build: ./proxy
     ports:
       - 70:70
       - 3080:3080
+      - 3081:3081
+    restart: always
+  ui:
+    image: bookmarkreader-ui
+    ports:
+      - "80:80"
     restart: always
