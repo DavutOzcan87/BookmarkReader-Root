@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/users', usersRouter);
 app.use('/users', bookmarkRoutes);
 app.use(function(req, res, next) {
-    next(createError(404));
+    next(createError(404 ,"location '"+ req.url + "' not found"));
 });
 
 
