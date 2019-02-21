@@ -34,7 +34,7 @@ services:
     build: ./proxy
     ports:
       - 443:3070
-      # - 80:3080
+      - 80:3071
     restart: always
   ui:
     image: bookmarkreader-ui
